@@ -9,6 +9,7 @@ import (
 	"os"
 )
 
+
 // Check what current pixel is totally black
 func isBlack(c color.Color) bool {
 	r, g, b, a := c.RGBA()
@@ -61,17 +62,19 @@ func GetColors(fileName string) error {
 
 	newImg := image.NewRGBA(bounds)
 
+	pixelArray := make([][]color.Color, size.X)
+	for i := range pixelArray {
+		pixelArray[i] = make([]color.Color, size.Y)
+	}
+	pAx := 0
+	pAy := 0
+
 	for x := 0; x < size.X; x++ {
 		for y := 0; y < size.Y; y++ {
-			c := bounds.At(x, y)
+			c := img.At(x, y)
 
-			// Step 1: remove all white...
-			if isWhite(c) {
-				continue
-			}
-
-			// ...black...
-			if isBlack(c) {
+			// Step 1: remove all white and black
+			if isWhite(c) || isBlack(c) {
 				continue
 			}
 
@@ -80,21 +83,39 @@ func GetColors(fileName string) error {
 
 			r, g, b, a := c.RGBA()
 			newColor := color.RGBA{
-				R: uint8(r),
-				G: uint8(g),
-				B: uint8(b),
-				A: uint8(a),
+				R: uint8(r >> 8),
+				G: uint8(g >> 8),
+				B: uint8(b >> 8),
+				A: uint8(a >> 8),
 			}
 
-			log.Printf("Save color on: [%d:%d]", x, y)
-			draw.Draw(newImg, img.Bounds(), &image.Uniform{newColor}, image.ZP, draw.Src)
+			pixelArray[pAx][pAy] = newColor;
+			pAx++
+			if pAx >= size.X {
+				pAx = 0
+				pAy++
+			}
 
-			// draw.Image.Set(x, y, c)
-			// log.Printf("[%d,%d]", x, y)
+			//log.Printf("Save color on: [%d:%d]", x, y)
+			//log.Printf("Save color: %d %d %d", uint8(r >> 8), uint8(g >> 8), uint8(b >> 8))
 
-			// log.Println("R:", r, "G:", g, "B:", b, "A:", a)
 		}
 	}
+	for x := 0; x < size.X; x++ {
+		for y := 0; y < size.Y; y++ {
+
+			m := image.NewRGBA(image.Rect(x, y, x + 1, y + 1))
+
+			newColor := pixelArray[x][y];
+			if newColor == nil {
+				draw.Draw(newImg, m.Bounds(), &image.Uniform{color.RGBA{0, 0, 255, 255}}, image.ZP, draw.Src)
+			} else {
+				draw.Draw(newImg, m.Bounds(), &image.Uniform{newColor}, image.ZP, draw.Src)
+			}
+
+		}
+	}
+
 
 	// Step 2: resize image to 2x2
 
