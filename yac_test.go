@@ -2,10 +2,10 @@ package yac
 
 import "testing"
 
-func TestGetColorsByJPG(t *testing.T) {
-	if err := GetColors("example.jpeg"); err != nil {
+func TestTransform(t *testing.T) {
+	if err := transform("example.jpeg"); err != nil {
 		t.Error(err.Error())
 		t.FailNow()
 	}
-	t.Log("All is okay")
+	t.Log("Done! See result in yac.jpg")
 }

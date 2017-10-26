@@ -91,7 +91,7 @@ import (
 	"os"
 )
 
-func GetColors(data interface{}) error {
+func transform(data interface{}) error {
 	src, err := Open(data)
 	if err != nil {
 		return err
