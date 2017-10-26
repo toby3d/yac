@@ -40,21 +40,15 @@ func isWhite(c color.Color) bool {
 	return false
 }
 
-// TODO: Check what current pixel is totally transparant
 
-func GetColors(fileName string) error {
-	file, err := os.Open(fileName)
-	defer file.Close()
+
+func GetColors(data interface{}) error {
+	src, err := Open(data)
 	if err != nil {
 		return err
 	}
 
-	img, err := jpeg.Decode(file)
-	if err != nil {
-		return err
-	}
-
-	bounds := img.Bounds()
+	bounds := src.Bounds()
 	size := bounds.Size()
 
 	log.Println("MaxWidth:", size.X)
