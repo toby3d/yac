@@ -112,8 +112,8 @@ func GetColors(data interface{}) error {
 	pAx := 0
 	pAy := 0
 
-	for x := 0; x < size.X; x++ {
-		for y := 0; y < size.Y; y++ {
+	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+		for x := bounds.Min.X; x < bounds.Max.X; x++ {
 			// TODO: check alpha pixels
 			if isWhite(src.At(x, y)) ||
 				isBlack(src.At(x, y)) {
