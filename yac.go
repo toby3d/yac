@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 package yac
 
 import (
@@ -8,39 +18,6 @@ import (
 	"log"
 	"os"
 )
-
-
-// Check what current pixel is totally black
-func isBlack(c color.Color) bool {
-	r, g, b, a := c.RGBA()
-	blackR, blackG, blackB, blackA := color.Black.RGBA()
-
-	if r == blackR &&
-		g == blackG &&
-		b == blackB &&
-		a == blackA {
-		return true
-	}
-
-	return false
-}
-
-// Check what current pixel is totally white
-func isWhite(c color.Color) bool {
-	r, g, b, a := c.RGBA()
-	whiteR, whiteG, whiteB, whiteA := color.White.RGBA()
-
-	if r == whiteR &&
-		g == whiteG &&
-		b == whiteB &&
-		a == whiteA {
-		return true
-	}
-
-	return false
-}
-
-
 
 func GetColors(data interface{}) error {
 	src, err := Open(data)
@@ -65,17 +42,13 @@ func GetColors(data interface{}) error {
 
 	for x := 0; x < size.X; x++ {
 		for y := 0; y < size.Y; y++ {
-			c := img.At(x, y)
-
-			// Step 1: remove all white and black
-			if isWhite(c) || isBlack(c) {
+			// TODO: check alpha pixels
+			if isWhite(src.At(x, y)) ||
+				isBlack(src.At(x, y)) {
 				continue
 			}
 
-			// ...and alpha pixels.
-			// TODO: check alpha pixels
-
-			r, g, b, a := c.RGBA()
+			r, g, b, a := src.At(x, y).RGBA()
 			newColor := color.RGBA{
 				R: uint8(r >> 8),
 				G: uint8(g >> 8),
@@ -83,24 +56,21 @@ func GetColors(data interface{}) error {
 				A: uint8(a >> 8),
 			}
 
-			pixelArray[pAx][pAy] = newColor;
+			pixelArray[pAx][pAy] = newColor
 			pAx++
 			if pAx >= size.X {
 				pAx = 0
 				pAy++
 			}
 
-			//log.Printf("Save color on: [%d:%d]", x, y)
-			//log.Printf("Save color: %d %d %d", uint8(r >> 8), uint8(g >> 8), uint8(b >> 8))
-
 		}
 	}
 	for x := 0; x < size.X; x++ {
 		for y := 0; y < size.Y; y++ {
 
-			m := image.NewRGBA(image.Rect(x, y, x + 1, y + 1))
+			m := image.NewRGBA(image.Rect(x, y, x+1, y+1))
 
-			newColor := pixelArray[x][y];
+			newColor := pixelArray[x][y]
 			if newColor == nil {
 				draw.Draw(newImg, m.Bounds(), &image.Uniform{color.RGBA{0, 0, 255, 255}}, image.ZP, draw.Src)
 			} else {
@@ -130,7 +100,7 @@ func GetColors(data interface{}) error {
 	// If icon has only one color - make background more darker;
 	// If icon have background - look up on pixels on borders: if them all equals - set same background color.
 
-	// Write image to separate file for visual debug
+	// TODO: Don't write result to file - just read and sort pixel colors
 	result, err := os.Create("yac.jpg")
 	defer result.Close()
 	if err != nil {
