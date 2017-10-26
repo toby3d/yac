@@ -1,4 +1,7 @@
 /*
+Package yac helps to analyze icons and give out up to 3 colors (background
+color, font color and button color) based and complementary icons colors.
+
 Initial Implementation
 
 The color for the background of the card was selected automatically based on the
@@ -13,10 +16,10 @@ give a beautiful result, it had shortcomings:
 What really wanted to
 
 The card was to be a real continuation of the icon. The colors are juicy and
-bright. I wanted to create the feeling that the card was carefully done by hand,
+bright. We wanted to create the feeling that the card was carefully done by hand,
 and not slipped something carelessly generated automatically.
 
-I want to do more beautifully always, but the resources are not unlimited. To
+We want to do more beautifully always, but the resources are not unlimited. To
 allocate a command to write a miracle library by definition of colors was not
 planned. So, the task:
 
