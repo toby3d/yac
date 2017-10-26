@@ -1,21 +1,27 @@
 /*
-https://medium.com/@iammishaanikin/98b8f0dcfdc5
-
 Initial Implementation
 
-The color for the background of the card was selected automatically based on the icon, the button - translucent white. The algorithm tried to determine the main color of the icon, sorting the pixels by hue. Such an approach did not always give a beautiful result, it had shortcomings:
+The color for the background of the card was selected automatically based on the
+icon, the button - translucent white. The algorithm tried to determine the main
+color of the icon, sorting the pixels by hue. Such an approach did not always
+give a beautiful result, it had shortcomings:
 
-     wrong definition of color,
-     "dirty" colors due to averaging,
-     dim buttons, boring cards.
+    wrong definition of color,
+    "dirty" colors due to averaging,
+    dim buttons, boring cards.
 
 What really wanted to
 
-The card was to be a real continuation of the icon. The colors are juicy and bright. I wanted to create the feeling that the card was carefully done by hand, and not slipped something carelessly generated automatically.
+The card was to be a real continuation of the icon. The colors are juicy and
+bright. I wanted to create the feeling that the card was carefully done by hand,
+and not slipped something carelessly generated automatically.
 
-I want to do more beautifully always, but the resources are not unlimited. To allocate a command to write a miracle library by definition of colors was not planned. So, the task:
+I want to do more beautifully always, but the resources are not unlimited. To
+allocate a command to write a miracle library by definition of colors was not
+planned. So, the task:
 
-    Minimal forces to improve the algorithm for determining colors, to figure out how to paint a card beautifully, without inventing a spaceship.
+    Minimal forces to improve the algorithm for determining colors, to figure
+    out how to paint a card beautifully, without inventing a spaceship.
 
 New algorithm for determining colors
 
@@ -44,15 +50,15 @@ translate to HSL, sort by lightness (L). We are painting a card.
 
 Light scheme:
 
-	Background: the lightest color;
-	Button: closest to the light;
-	Text: is the darkest.
+	background - the lightest color;
+	button - closest to the light;
+	text - the darkest.
 
 Dark scheme (if two or more colors are dark):
 
-	Background: is the darkest color;
-	Button: closest to the dark one;
-	Text: the lightest.
+	background - the darkest color;
+	button - closest to the dark one;
+	text - the lightest.
 
 Applying colors, check the contrast: Lightness difference between background and
 button ≥ 20; between the background and the text ≥ 60. If not, correct.
@@ -70,6 +76,9 @@ And most importantly: we provided for special cases:
 	not merge.
 	Icon with background: look at pixels around the edges; if everyone is the
 	same, we put the same background of the card.
+
+
+Source: https://medium.com/@iammishaanikin/98b8f0dcfdc5
 */
 package yac
 
