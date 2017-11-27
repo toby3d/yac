@@ -29,6 +29,6 @@ func Open(data interface{}) (image.Image, error) {
 		img, _, err := image.Decode(src)
 		return img, err
 	default: // Unsupported
-		return nil, UnsupportedType
+		return nil, ErrUnsupportedType
 	}
 }
