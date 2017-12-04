@@ -5,7 +5,7 @@ import (
 )
 
 func TestTransform(t *testing.T) {
-	colors, err := transform("example.jpeg")
+	colors, err := transform("unnamed.png")
 	if err != nil {
 		t.Error(err.Error())
 		t.FailNow()

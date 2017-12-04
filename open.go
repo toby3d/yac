@@ -4,7 +4,10 @@ import (
 	"bytes"
 	"errors"
 	"image"
+	_ "image/jpeg"
+	_ "image/png"
 	"io"
+	"log"
 	"os"
 )
 
@@ -20,13 +23,16 @@ func Open(data interface{}) (image.Image, error) {
 			return nil, err
 		}
 
-		img, _, err := image.Decode(file)
+		img, format, err := image.Decode(file)
+		log.Println("FORMAT:", format)
 		return img, err
 	case []byte: // Raw bytes
-		img, _, err := image.Decode(bytes.NewReader(src))
+		img, format, err := image.Decode(bytes.NewReader(src))
+		log.Println("FORMAT:", format)
 		return img, err
 	case io.Reader: // Reader
-		img, _, err := image.Decode(src)
+		img, format, err := image.Decode(src)
+		log.Println("FORMAT:", format)
 		return img, err
 	default: // Unsupported
 		return nil, ErrUnsupportedType
