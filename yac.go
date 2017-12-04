@@ -85,12 +85,28 @@ Source: https://medium.com/@iammishaanikin/98b8f0dcfdc5
 */
 package yac
 
-func transform(data interface{}) error {
+import "image/color"
+
+func transform(data interface{}) ([]color.RGBA, error) {
 	src, err := Open(data)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	dst := filter(src)
-	return save(dst) // TODO: Don't write to file - just read and sort colors
+	filtered := filter(src)
+	finded := find(filtered)
+	sorted := sort(finded)
+
+	results := make([]color.RGBA, len(sorted))
+	for i := range sorted {
+		r, g, b, a := sorted[i].RGBA()
+		results[i] = color.RGBA{
+			R: uint8(r >> 8),
+			G: uint8(g >> 8),
+			B: uint8(b >> 8),
+			A: uint8(a >> 8),
+		}
+	}
+
+	return results, nil // TODO: Don't write to file - just read and sort colors
 }

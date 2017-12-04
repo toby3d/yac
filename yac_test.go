@@ -1,11 +1,20 @@
 package yac
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestTransform(t *testing.T) {
-	if err := transform("example.jpeg"); err != nil {
+	colors, err := transform("example.jpeg")
+	if err != nil {
 		t.Error(err.Error())
 		t.FailNow()
 	}
-	t.Log("Done! See result in yac.jpg")
+	for i := range colors {
+		t.Log("R:", colors[i].R)
+		t.Log("G:", colors[i].G)
+		t.Log("B:", colors[i].B)
+		t.Log("A:", colors[i].A)
+		t.Log("======")
+	}
 }
