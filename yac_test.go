@@ -1,8 +1,6 @@
 package yac
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestTransform(t *testing.T) {
 	colors, err := Analyze("example.jpeg")
@@ -11,10 +9,10 @@ func TestTransform(t *testing.T) {
 		t.FailNow()
 	}
 	for i := range colors {
-		t.Log("R:", colors[i].R)
-		t.Log("G:", colors[i].G)
-		t.Log("B:", colors[i].B)
-		t.Log("A:", colors[i].A)
+		r, g, b, _ := colors[i].RGBA()
+		t.Log("R:", (r >> 8))
+		t.Log("G:", (g >> 8))
+		t.Log("B:", (b >> 8))
 		t.Log("======")
 	}
 }
