@@ -12,6 +12,7 @@ func Analyze(data interface{}) (Colors, error) {
 
 	pixels := Filter(src)
 	pixels = pixels.Find()
+	pixels = pixels.Prune()
 
 	return pixels.Sort(), nil
 }
