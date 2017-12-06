@@ -1,14 +1,13 @@
 package yac
 
-import (
-	"image"
-	"image/color"
-)
+import "image"
 
-func filter(src image.Image) []color.Color {
+// Filter method filter raw image pixels from white, black and any-transparent
+// pixels. Returned Colors array of filtered pixels.
+func Filter(src image.Image) Colors {
 	bounds := src.Bounds()
 
-	filtered := make([]color.Color, bounds.Max.X*bounds.Max.Y)
+	pixels := make(Colors, bounds.Max.X*bounds.Max.Y)
 	count := 0
 	for x := bounds.Min.X; x < bounds.Max.X; x++ {
 		for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
@@ -19,11 +18,11 @@ func filter(src image.Image) []color.Color {
 				continue
 			}
 
-			filtered[count] = pixel
+			pixels[count] = pixel
 			count++
 		}
 	}
 
-	filtered = filtered[:count-1]
-	return filtered
+	pixels = pixels[:count-1]
+	return pixels
 }

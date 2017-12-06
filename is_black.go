@@ -2,15 +2,14 @@ package yac
 
 import "image/color"
 
-// IsBlack check what the current pixel is black.
+// isBlack check what the current pixel is black.
 func isBlack(c color.Color) bool {
-	r, g, b, a := c.RGBA()
-	rB, gB, bB, aB := color.Black.RGBA()
+	r, g, b, _ := c.RGBA()
+	R, G, B, _ := color.Black.RGBA()
 
-	if r == rB &&
-		g == gB &&
-		b == bB &&
-		a == aB {
+	if r == R &&
+		g == G &&
+		b == B {
 		return true
 	}
 

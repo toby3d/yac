@@ -5,6 +5,7 @@ import (
 	"math"
 )
 
+// getLightness convert RGBA color to HSL color and returned value of L.
 func getLightness(color color.Color) float64 {
 	r, g, b, _ := color.RGBA()
 

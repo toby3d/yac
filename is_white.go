@@ -2,15 +2,14 @@ package yac
 
 import "image/color"
 
-// IsWhite check what the current pixel is white.
+// isWhite helper check what the current pixel is white.
 func isWhite(c color.Color) bool {
-	r, g, b, a := c.RGBA()
-	rW, gW, bW, aW := color.White.RGBA()
+	r, g, b, _ := c.RGBA()
+	R, G, B, _ := color.White.RGBA()
 
-	if r == rW &&
-		g == gW &&
-		b == bW &&
-		a == aW {
+	if r == R &&
+		g == G &&
+		b == B {
 		return true
 	}
 

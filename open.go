@@ -10,9 +10,11 @@ import (
 	"os"
 )
 
+// ErrUnsupportedType is returned in case if raw input data of image is
+// not supported for decoding by Open method.
 var ErrUnsupportedType = errors.New("use string, byte array or io.Reader only")
 
-// Open function analyze input data and try decode that as image.Image.
+// Open method open a input data and try decode that as image.Image.
 func Open(data interface{}) (image.Image, error) {
 	switch src := data.(type) {
 	case string: // File path
