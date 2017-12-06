@@ -6,7 +6,7 @@ import "image/color"
 // TODO: I'm not sure that I need to filter "any-transparent" pixels...
 func isAlpha(c color.Color) bool {
 	_, _, _, a := c.RGBA()
-	if uint8(a>>8) < 255 {
+	if a < 65535 {
 		return true
 	}
 

@@ -13,5 +13,5 @@ func getLightness(color color.Color) float64 {
 	Cmin := math.Min(math.Min(float64(r), float64(g)), float64(b))
 	L := (Cmax + Cmin) / 2
 
-	return L
+	return (L / 65535) * 100
 }
