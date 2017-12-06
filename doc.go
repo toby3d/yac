@@ -1,6 +1,6 @@
 /*
-Package yac helps to analyze icons and give out up to 3 colors (background
-color, font color and button color) based and complementary icons colors.
+Package yac helps to analyze icons and give out up to 4 colors (for example for
+background, font and button of app card) based and complementary icons colors.
 
 Initial Implementation
 
@@ -83,4 +83,4 @@ And most importantly: we provided for special cases:
 
 Source: https://medium.com/@iammishaanikin/98b8f0dcfdc5
 */
-package yac
+package yac // import "github.com/toby3d/yac"
