@@ -3,7 +3,7 @@ package yac
 import "image/color"
 
 // Prune helper check Colors array on duplicated items. Returned Colors array
-// with unique color.Color items.
+// with unique color.Color items in random order.
 func (c Colors) Prune() Colors {
 	sorted := map[color.Color]bool{}
 
