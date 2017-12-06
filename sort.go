@@ -8,8 +8,8 @@ import (
 func sort(finded []color.Color) []color.Color {
 	gosort.SliceStable(finded, func(i, j int) bool {
 		one := getLight(finded[i])
-		two := getLight(finded[i])
-		return one < two
+		two := getLight(finded[j])
+		return one > two
 	})
 
 	return finded
