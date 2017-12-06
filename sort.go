@@ -2,6 +2,7 @@ package yac
 
 import (
 	"image/color"
+	"math"
 	gosort "sort"
 )
 
@@ -15,8 +16,12 @@ func sort(finded []color.Color) []color.Color {
 	return finded
 }
 
-func getLight(color color.Color) uint32 {
+func getLight(color color.Color) float64 {
 	r, g, b, _ := color.RGBA()
-	lightness := (r^2)/299 + (g^2)/587 + (b^2)/114
-	return lightness
+
+	Cmax := math.Max(math.Max(float64(r), float64(g)), float64(b))
+	Cmin := math.Min(math.Min(float64(r), float64(g)), float64(b))
+	L := (Cmax + Cmin) / 2
+
+	return L
 }
