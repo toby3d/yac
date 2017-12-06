@@ -1,12 +1,15 @@
 package yac
 
-import "math"
+import (
+	"image/color"
+	"math"
+)
 
 // Find method find key pixels in Colors array of filtered (or not) pixels.
 // Returned an non-sorted Colors array of 4 key colors which can already be used
 // as a basis for coloring.
-func (c Colors) Find() Colors {
-	colors := make(Colors, 4)
+func Find(c []color.Color) []color.Color {
+	colors := make([]color.Color, 4)
 	count := 0
 
 	// Find 4 square segments lenght of array

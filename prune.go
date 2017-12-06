@@ -4,7 +4,7 @@ import "image/color"
 
 // Prune helper check Colors array on duplicated items. Returned Colors array
 // with unique color.Color items in random order.
-func (c Colors) Prune() Colors {
+func Prune(c []color.Color) []color.Color {
 	sorted := map[color.Color]bool{}
 
 	// Create a map of all unique elements.
@@ -13,7 +13,7 @@ func (c Colors) Prune() Colors {
 	}
 
 	// Place all keys from the map into a slice.
-	unique := Colors{}
+	var unique []color.Color
 	for key := range sorted {
 		unique = append(unique, key)
 	}
