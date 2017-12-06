@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-func find(filtered []color.Color) []color.Color {
+func Find(filtered []color.Color) []color.Color {
 	pixels := make([]color.Color, 4)
 	count := 0
 
