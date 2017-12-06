@@ -95,7 +95,7 @@ func transform(data interface{}) ([]color.RGBA, error) {
 
 	filtered := filter(src)
 	finded := find(filtered)
-	sorted := sort(finded)
+	sorted := Sort(finded)
 
 	results := make([]color.RGBA, len(sorted))
 	for i := range sorted {
