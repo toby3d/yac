@@ -5,9 +5,9 @@ import (
 	"math"
 )
 
-// Find method find key pixels in Colors array of filtered (or not) pixels.
-// Returned an non-sorted Colors array of 4 key colors which can already be used
-// as a basis for coloring.
+// Find method find key pixels in color.Color array of filtered (or not) pixels.
+// Returned an non-sorted color.Color array of 4 key colors which can already be
+// used as a basis for coloring.
 func Find(c []color.Color) []color.Color {
 	colors := make([]color.Color, 4)
 	count := 0

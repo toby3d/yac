@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"errors"
 	"image"
-	_ "image/jpeg"
-	_ "image/png"
+	_ "image/jpeg" // For JPEG data
+	_ "image/png"  // For PNG data
 	"io"
 	"os"
 )
@@ -19,7 +19,9 @@ func Open(data interface{}) (image.Image, error) {
 	switch src := data.(type) {
 	case string: // File path
 		file, err := os.Open(src)
-		defer file.Close()
+		defer func() {
+			err = file.Close()
+		}()
 		if err != nil {
 			return nil, err
 		}

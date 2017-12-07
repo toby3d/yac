@@ -6,7 +6,7 @@ import (
 )
 
 // Filter method filter raw image pixels from white, black and any-transparent
-// pixels. Returned Colors array of filtered pixels.
+// pixels. Returned color.Color array of filtered pixels.
 func Filter(src image.Image) []color.Color {
 	bounds := src.Bounds()
 
