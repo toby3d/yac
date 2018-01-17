@@ -34,6 +34,8 @@ func Open(data interface{}) (image.Image, error) {
 	case io.Reader: // Reader
 		img, _, err := image.Decode(src)
 		return img, err
+	case image.Image: // Already decoded image
+		return src, nil
 	default: // Unsupported
 		return nil, ErrUnsupportedType
 	}
