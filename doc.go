@@ -83,4 +83,10 @@ And most importantly: we provided for special cases:
 
 Source: https://medium.com/@iammishaanikin/98b8f0dcfdc5
 */
-package yac // import "github.com/toby3d/yac"
+package yac // import "gitlab.com/toby3d/yac"
+
+import "log"
+
+func init() {
+	log.Println("This package may be outdated. See actual verison on GitLab: https://gitlab.com/toby3d/yac")
+}
